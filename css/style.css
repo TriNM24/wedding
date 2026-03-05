@@ -521,18 +521,18 @@ body.invitation-opened {
 
 .inv-leaf-left {
   left: -5%;
-  top: 0;
+  top: 15%;
   width: 140px;
   height: 280px;
-  transform: rotate(-10deg);
+  transform: rotate(50deg);
 }
 
 .inv-leaf-right {
   right: -5%;
-  bottom: 15%;
+  bottom: 35%;
   width: 120px;
   height: 240px;
-  transform: rotate(15deg) scaleX(-1);
+  transform: rotate(180deg) scaleX(-1);
 }
 
 .inv-leaf-top {
