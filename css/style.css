@@ -4,13 +4,13 @@
 */
 
 :root {
-  --bg-dark: #23381E;
+  --bg-dark: #23381e;
   --bg-mid: #1f3219;
   --bg-deep: #1a2b15;
-  --green-main: #4E6439;
+  --green-main: #4e6439;
   --green-rgb: 78, 100, 57;
-  --green-light-1: #90EE90;
-  --green-light-2: #98FB98;
+  --green-light-1: #90ee90;
+  --green-light-2: #98fb98;
   --white: #fff;
   --cream: #faf9f6;
   --text: #2d2d2d;
@@ -30,7 +30,7 @@ html {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: var(--text);
   background: var(--cream);
   overflow-x: hidden;
@@ -57,7 +57,7 @@ body.invitation-opened {
 }
 
 .demo-navbar-logo {
-  font-family: 'Pattaya', cursive;
+  font-family: "Pattaya", cursive;
   font-size: 1.25rem;
   font-weight: 400;
   color: #1f2937;
@@ -122,7 +122,9 @@ body.invitation-opened {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   box-shadow: 0 2px 12px rgba(var(--green-rgb), 0.2);
 }
 
@@ -164,7 +166,9 @@ body.invitation-opened {
   align-items: center;
   justify-content: center;
   z-index: 10;
-  transition: opacity 0.5s, visibility 0.5s;
+  transition:
+    opacity 0.5s,
+    visibility 0.5s;
 }
 
 .invitation-wrapper.opened .invitation-cover {
@@ -176,7 +180,12 @@ body.invitation-opened {
 .demo-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, var(--bg-dark), var(--bg-mid), var(--bg-deep));
+  background: linear-gradient(
+    to bottom right,
+    var(--bg-dark),
+    var(--bg-mid),
+    var(--bg-deep)
+  );
 }
 
 /* ========== Khung thiệp (envelope + card) ========== */
@@ -231,8 +240,10 @@ body.invitation-opened {
   transform: translate(-50%, -50%);
   z-index: 30;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #4E6439, rgb(48, 70, 27));
-  box-shadow: 0 4px 20px rgba(78, 100, 57, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  background: radial-gradient(circle at 30% 30%, #4e6439, rgb(48, 70, 27));
+  box-shadow:
+    0 4px 20px rgba(78, 100, 57, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,8 +257,13 @@ body.invitation-opened {
 }
 
 @keyframes seal-pulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.05); }
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
 }
 
 .seal-icon {
@@ -274,8 +290,8 @@ body.invitation-opened {
 }
 
 .card-names {
-  color: #4E6439;
-  font-family: 'Libre Baskerville', 'Baskerville', 'Times New Roman', serif;
+  color: #4e6439;
+  font-family: "Libre Baskerville", "Baskerville", "Times New Roman", serif;
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem; /* mb-2 */
@@ -298,7 +314,7 @@ body.invitation-opened {
 .card-line {
   width: 2.5rem; /* w-10 */
   height: 1px; /* h-px */
-  background: linear-gradient(to right, transparent, #4E6439);
+  background: linear-gradient(to right, transparent, #4e6439);
 }
 
 .card-divider .card-line:last-of-type {
@@ -306,14 +322,14 @@ body.invitation-opened {
 }
 
 .card-symbol {
-  color: #4E6439;
+  color: #4e6439;
   opacity: 0.7;
   font-size: 0.875rem; /* text-sm */
 }
 
 .card-date {
   color: rgba(78, 100, 57, 0.7);
-  font-family: 'Libre Baskerville', 'Baskerville', 'Times New Roman', serif;
+  font-family: "Libre Baskerville", "Baskerville", "Times New Roman", serif;
   font-size: 1rem; /* text-base */
   margin-bottom: 1.25rem; /* mb-5 */
 }
@@ -324,7 +340,7 @@ body.invitation-opened {
 
 .card-phrase {
   color: rgba(78, 100, 57, 0.7);
-  font-family: 'Libre Baskerville', 'Baskerville', 'Times New Roman', serif;
+  font-family: "Libre Baskerville", "Baskerville", "Times New Roman", serif;
   font-size: 1rem;
   font-weight: 300; /* font-light */
   margin: 0;
@@ -340,14 +356,16 @@ body.invitation-opened {
   padding: 0.625rem 2rem; /* py-2.5 px-8 */
   font-size: 1.125rem; /* text-lg */
   font-weight: 500;
-  font-family: 'Libre Baskerville', 'Baskerville', 'Times New Roman', serif;
+  font-family: "Libre Baskerville", "Baskerville", "Times New Roman", serif;
   color: #ffffff;
-  background-color: #4E6439;
+  background-color: #4e6439;
   border: none;
   border-radius: 9999px; /* rounded-full */
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(78, 100, 57, 0.35);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   overflow: hidden;
 }
 
@@ -371,15 +389,26 @@ body.invitation-opened {
   left: -100%;
   height: 100%;
   width: 2rem; /* w-8 */
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
   animation: shine 3s ease-in-out infinite;
   pointer-events: none;
 }
 
 @keyframes shine {
-  0% { left: -100%; }
-  50% { left: 100%; }
-  100% { left: 100%; }
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 .card-dots {
@@ -396,9 +425,15 @@ body.invitation-opened {
   border-radius: 50%;
 }
 
-.dot-1 { background-color: #90EE90; }
-.dot-2 { background-color: #98FB98; }
-.dot-3 { background-color: #4E6439; }
+.dot-1 {
+  background-color: #90ee90;
+}
+.dot-2 {
+  background-color: #98fb98;
+}
+.dot-3 {
+  background-color: #4e6439;
+}
 
 /* ========== NỘI DUNG SAU KHI MỞ ========== */
 .invitation-inner {
@@ -407,7 +442,9 @@ body.invitation-opened {
   overflow-y: hidden;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s 0.2s, transform 0.6s 0.2s;
+  transition:
+    opacity 0.6s 0.2s,
+    transform 0.6s 0.2s;
 }
 
 .invitation-wrapper.opened .invitation-inner {
@@ -426,7 +463,9 @@ body.invitation-opened {
   margin-bottom: 3rem;
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.6s, transform 0.6s;
+  transition:
+    opacity 0.6s,
+    transform 0.6s;
 }
 
 .section.visible {
@@ -435,7 +474,7 @@ body.invitation-opened {
 }
 
 .section-title {
-  font-family: 'Libre Baskerville', 'Baskerville', serif;
+  font-family: "Libre Baskerville", "Baskerville", serif;
   font-size: clamp(1.5rem, 4vw, 2rem);
   color: var(--green-main);
   text-align: center;
@@ -444,7 +483,7 @@ body.invitation-opened {
 }
 
 .section-title::after {
-  content: '';
+  content: "";
   display: block;
   width: 60px;
   height: 3px;
@@ -460,7 +499,7 @@ body.invitation-opened {
 
 .invitation-announcement {
   text-align: center;
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: clamp(0.95rem, 2.5vw, 1.1rem);
   color: var(--green-main);
   margin: -0.5rem 0 1rem;
@@ -485,7 +524,7 @@ body.invitation-opened {
 /* ========== Section Invitation – Dark green card (exact layout from image) ========== */
 .section-invitation {
   position: relative;
-  background: #1A3620;
+  background: #1a3620;
   margin-left: -1.25rem;
   margin-right: -1.25rem;
   padding: 2.5rem 1.25rem 3rem;
@@ -522,9 +561,10 @@ body.invitation-opened {
 .inv-leaf-left {
   left: -5%;
   top: 15%;
-  width: 140px;
-  height: 280px;
-  transform: rotate(50deg) translateX(-15%);
+  width: 220px;
+  height: 440px;
+  transform: rotate(50deg) translateX(-15%) scale(1.5);
+  transform-origin: center center;
 }
 
 .inv-leaf-right {
@@ -545,9 +585,21 @@ body.invitation-opened {
 }
 
 @media (min-width: 640px) {
-  .inv-leaf-left { width: 200px; height: 400px; left: -3%; }
-  .inv-leaf-right { width: 180px; height: 360px; right: -2%; }
-  .inv-leaf-top { width: 120px; height: 90px; }
+  .inv-leaf-left {
+    width: 320px;
+    height: 560px;
+    left: -3%;
+    transform: rotate(50deg) translateX(-35%) scale(1);
+  }
+  .inv-leaf-right {
+    width: 320px;
+    height: 560px;
+    right: -5%;
+  }
+  .inv-leaf-top {
+    width: 120px;
+    height: 90px;
+  }
 }
 
 /* Two-column parents */
@@ -562,7 +614,10 @@ body.invitation-opened {
 }
 
 @media (min-width: 640px) {
-  .invitation-parents { gap: 2rem 4rem; max-width: 560px; }
+  .invitation-parents {
+    gap: 2rem 4rem;
+    max-width: 560px;
+  }
 }
 
 .invitation-parents-col {
@@ -570,7 +625,7 @@ body.invitation-opened {
 }
 
 .invitation-parents-heading {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 0.85rem;
   letter-spacing: 0.05em;
   margin-bottom: 0.35rem;
@@ -578,7 +633,7 @@ body.invitation-opened {
 }
 
 .invitation-parents-name {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 1rem;
   font-weight: 700;
   margin: 0 0 0.2rem;
@@ -586,11 +641,13 @@ body.invitation-opened {
 }
 
 @media (min-width: 640px) {
-  .invitation-parents-name { font-size: 1.1rem; }
+  .invitation-parents-name {
+    font-size: 1.1rem;
+  }
 }
 
 .invitation-parents-address {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.8);
   margin: 0;
@@ -599,7 +656,7 @@ body.invitation-opened {
 
 /* Main announcement */
 .invitation-main-title {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.12em;
@@ -611,7 +668,7 @@ body.invitation-opened {
 }
 
 .invitation-subtitle {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 0.95rem;
   letter-spacing: 0.08em;
   text-align: center;
@@ -630,7 +687,7 @@ body.invitation-opened {
 }
 
 .invitation-name {
-  font-family: 'Great Vibes', 'Libre Baskerville', cursive;
+  font-family: "Great Vibes", "Libre Baskerville", cursive;
   font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 400;
   margin: 0;
@@ -639,7 +696,7 @@ body.invitation-opened {
 }
 
 .invitation-role {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   margin: 0.15rem 0 0.5rem;
@@ -647,7 +704,7 @@ body.invitation-opened {
 }
 
 .invitation-amp {
-  font-family: 'Great Vibes', 'Libre Baskerville', cursive;
+  font-family: "Great Vibes", "Libre Baskerville", cursive;
   font-size: clamp(2rem, 5vw, 2.75rem);
   margin: 0.75rem 0;
   color: #fff;
@@ -667,7 +724,7 @@ body.invitation-opened {
 }
 
 .invitation-label {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 0.8rem;
   letter-spacing: 0.06em;
   margin: 0 0 0.2rem;
@@ -675,7 +732,7 @@ body.invitation-opened {
 }
 
 .invitation-time {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
   margin: 0.25rem 0 0.5rem;
@@ -683,7 +740,7 @@ body.invitation-opened {
 }
 
 .invitation-date {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 0.85rem;
   letter-spacing: 0.04em;
   margin: 0.5rem 0 0.2rem;
@@ -705,14 +762,14 @@ body.invitation-opened {
 }
 
 .invitation-lunar {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.75);
   margin: 0;
 }
 
 .invitation-khai-tiec {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 0.85rem;
   margin: 0.5rem 0 1rem;
   color: rgba(255, 255, 255, 0.9);
@@ -726,15 +783,17 @@ body.invitation-opened {
 .invitation-add-calendar {
   display: inline-block;
   padding: 0.6rem 1.75rem;
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.95);
-  background: #385A3F;
+  background: #385a3f;
   border: none;
   border-radius: 9999px;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  transition:
+    background 0.2s,
+    transform 0.2s;
   margin-top: 0.5rem;
 }
 
@@ -769,7 +828,7 @@ body.invitation-opened {
 }
 
 .invitation-map-title {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 0.9rem;
   letter-spacing: 0.08em;
   margin: 0 0 0.75rem;
@@ -840,10 +899,10 @@ body.invitation-opened {
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  font-family: 'Libre Baskerville', 'Baskerville', serif;
+  font-family: "Libre Baskerville", "Baskerville", serif;
   font-size: clamp(1.15rem, 3.2vw, 1.5rem);
   font-weight: 600;
-  color: #2D6F4B; /* dark green như mẫu */
+  color: #2d6f4b; /* dark green như mẫu */
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -901,7 +960,7 @@ body.invitation-opened {
   text-transform: none;
   letter-spacing: 0;
   vertical-align: 0.3em;
-  color: #2D6F4B;
+  color: #2d6f4b;
 }
 
 /* Lá solid la1.png – cluster trái giữa + góc dưới phải, giữ nguyên màu */
@@ -1119,19 +1178,19 @@ body.invitation-opened {
 }
 
 .couple-role {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.08em;
-  color: #2D6F4B;
+  color: #2d6f4b;
   margin-bottom: 0.2rem;
 }
 
 .couple-name {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: clamp(1.25rem, 2.8vw, 1.6rem);
   font-weight: 600;
-  color: #2D6F4B;
+  color: #2d6f4b;
   margin: 0;
   letter-spacing: 0.02em;
 }
@@ -1183,7 +1242,7 @@ body.invitation-opened {
 }
 
 .schedule-detail h4 {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -1252,7 +1311,9 @@ body.invitation-opened {
   overflow: hidden;
   aspect-ratio: 1;
   box-shadow: 0 4px 16px rgba(var(--green-rgb), 0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 .album-item:hover {
@@ -1278,7 +1339,9 @@ body.invitation-opened {
   padding: 2rem;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition:
+    opacity 0.3s,
+    visibility 0.3s;
 }
 
 .lightbox.active {
@@ -1321,7 +1384,7 @@ body.invitation-opened {
 }
 
 .thanks-sign {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 1.5rem;
   color: var(--green-main);
   text-align: center;
