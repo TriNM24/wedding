@@ -524,7 +524,7 @@ body.invitation-opened {
   top: 15%;
   width: 140px;
   height: 280px;
-  transform: rotate(50deg);
+  transform: rotate(50deg) translateX(-15%);
 }
 
 .inv-leaf-right {
@@ -532,7 +532,7 @@ body.invitation-opened {
   bottom: 35%;
   width: 120px;
   height: 240px;
-  transform: rotate(180deg) scaleX(-1);
+  transform: rotate(180deg) scaleX(-1) translateX(20%);
 }
 
 .inv-leaf-top {
