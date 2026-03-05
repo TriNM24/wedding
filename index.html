@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,15 +10,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Pattaya&family=Great+Vibes&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    // Suppress Grammarly unload policy violation
+    (function() {
+      if (window.addEventListener) {
+        window.addEventListener('beforeunload', function(e) {
+          delete e['returnValue'];
+        });
+      }
+    })();
+  </script>
 </head>
-<body>
+<body data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false">
   <canvas id="leafCanvas" aria-hidden="true" title="Hiệu ứng cánh hoa rơi"></canvas>
 
   <button type="button" id="musicToggle" class="music-toggle" aria-label="Phát / Tạm dừng nhạc">
     <i class="fas fa-music"></i>
     <span class="music-label">Nhạc</span>
   </button>
-  <audio id="bgMusic" loop>
+  <audio id="bgMusic" loop autoplay muted>
     <source src="images/background-music.mp3" type="audio/mpeg">
   </audio>
 
@@ -244,19 +254,74 @@
       var audio = document.getElementById('bgMusic');
       var btn = document.getElementById('musicToggle');
       var icon = btn.querySelector('i');
-      btn.addEventListener('click', function() {
-        if (audio.paused) {
-          audio.play().catch(function() {});
+      var hasTriedAutoplay = false;
+
+      // Set initial icon state
+      icon.classList.add('fa-play');
+
+      // Function to start music
+      function startMusic() {
+        audio.muted = false; // Unmute the audio
+        audio.play().then(function() {
           icon.classList.remove('fa-play');
           icon.classList.add('fa-pause');
+          console.log('Music playing successfully');
+        }).catch(function(error) {
+          console.log('Autoplay blocked or error:', error);
+          icon.classList.remove('fa-pause');
+          icon.classList.add('fa-play');
+        });
+      }
+
+      // Try to play on load
+      setTimeout(function() {
+        if (!hasTriedAutoplay) {
+          hasTriedAutoplay = true;
+          startMusic();
+        }
+      }, 500);
+
+      // Play on any user interaction
+      function playOnInteraction() {
+        if (audio.paused && !hasTriedAutoplay) {
+          hasTriedAutoplay = true;
+          startMusic();
+        }
+      }
+
+      // Listen for user interactions
+      document.addEventListener('click', playOnInteraction, { once: true });
+      document.addEventListener('touchstart', playOnInteraction, { once: true });
+      document.addEventListener('keydown', playOnInteraction, { once: true });
+
+      // Toggle button click handler
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (audio.paused) {
+          startMusic();
         } else {
           audio.pause();
           icon.classList.remove('fa-pause');
           icon.classList.add('fa-play');
         }
       });
-      audio.addEventListener('play', function() { icon.classList.remove('fa-play'); icon.classList.add('fa-pause'); });
-      audio.addEventListener('pause', function() { icon.classList.remove('fa-pause'); icon.classList.add('fa-play'); });
+
+      // Update icon based on audio state
+      audio.addEventListener('play', function() {
+        icon.classList.remove('fa-play');
+        icon.classList.add('fa-pause');
+      });
+      audio.addEventListener('pause', function() {
+        icon.classList.remove('fa-pause');
+        icon.classList.add('fa-play');
+      });
+
+      // Handle audio errors
+      audio.addEventListener('error', function(e) {
+        console.error('Audio error:', e);
+        icon.classList.remove('fa-pause');
+        icon.classList.add('fa-play');
+      });
     })();
 
     (function() {
