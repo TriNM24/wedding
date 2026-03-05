@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiệp Cưới Toàn & Diệp | Thanh Diệp Xanh</title>
+  <!-- Google Fonts: Baskerville-style + body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Pattaya&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="leafCanvas" aria-hidden="true" title="Hiệu ứng cánh hoa rơi"></canvas>
+
+  <button type="button" id="musicToggle" class="music-toggle" aria-label="Phát / Tạm dừng nhạc">
+    <i class="fas fa-music"></i>
+    <span class="music-label">Nhạc</span>
+  </button>
+  <audio id="bgMusic" loop>
+    <source src="images/background-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="invitationWrapper" class="invitation-wrapper">
+    <!-- ========== MẶT TRƯỚC THIỆP – Giống demo chungdoi.com (envelope + thẻ trắng) ========== -->
+    <div id="invitationCover" class="invitation-cover">
+      <div class="demo-bg"></div>
+      <div class="envelope-wrap">
+        <div class="envelope-card-size">
+          <!-- Nắp phong bì (flap) – SVG giống demo -->
+          <div class="envelope-flap" id="envelopeFlap">
+            <svg viewBox="0 0 380 100" preserveAspectRatio="none" class="flap-svg">
+              <defs>
+                <linearGradient id="flapGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#1a2b15"/>
+                  <stop offset="100%" stop-color="rgb(6, 23, 1)"/>
+                </linearGradient>
+              </defs>
+              <path d="M 16 0 L 364 0 Q 380 0 380 16 L 380 20 L 190 100 L 0 20 L 0 16 Q 0 0 16 0 Z" fill="url(#flapGradient)"/>
+            </svg>
+          </div>
+          <!-- Dấu seal (trái tim) giữa nắp -->
+          <div class="envelope-seal" id="envelopeSeal">
+            <svg viewBox="0 0 24 24" class="seal-icon" fill="#ffffff">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          <!-- Thẻ trắng bên trong -->
+          <div class="envelope-card">
+            <div class="envelope-card-inner">
+              <h1 class="card-names">Toàn & Diệp</h1>
+              <div class="card-divider">
+                <span class="card-line"></span>
+                <span class="card-symbol">❦</span>
+                <span class="card-line"></span>
+              </div>
+              <div class="card-date">7 tháng 2, 2026</div>
+              <div class="card-phrase-wrap">
+                <p class="card-phrase">Thân Mời</p>
+              </div>
+              <button type="button" id="openBtn" class="btn-open">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="btn-icon">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76"/>
+                </svg>
+                <span>Mở thiệp</span>
+                <span class="btn-shine"></span>
+              </button>
+              <div class="card-dots">
+                <span class="dot dot-1"></span>
+                <span class="dot dot-2"></span>
+                <span class="dot dot-3"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== NỘI DUNG SAU KHI MỞ THIỆP ========== -->
+    <div id="invitationInner" class="invitation-inner">
+      <div class="inner-content">
+        <section id="section-invitation" class="section section-invitation">
+          <h2 class="section-title">TRÂN TRỌNG BÁO TIN</h2>
+          <p class="invitation-announcement">LỄ THÀNH HÔN CỦA CON CHÚNG TÔI</p>
+          <div class="invitation-text">
+            <p>Trân trọng kính mời quý khách đến dự buổi tiệc chung vui cùng gia đình chúng tôi.</p>
+            <p><strong>Chú rể:</strong> Văn Toàn</p>
+            <p><strong>Cô dâu:</strong> Thanh Diệp</p>
+            <p>Rất hân hạnh được đón tiếp!</p>
+          </div>
+        </section>
+
+        <section id="section-couple" class="section section-couple">
+          <!-- Hai chấm mờ hai bên (giữa chiều dọc) -->
+          <span class="couple-dot couple-dot-left" aria-hidden="true"></span>
+          <span class="couple-dot couple-dot-right" aria-hidden="true"></span>
+
+          <h2 class="couple-story-title">
+            <span class="title-leaf title-leaf-left"><img src="images/la2.png" alt=""></span>
+            <span class="title-line title-line-left"></span>
+            THE STORY <em>of</em> LOVE
+            <span class="title-line title-line-right"></span>
+            <span class="title-leaf title-leaf-right"><img src="images/la2.png" alt=""></span>
+          </h2>
+
+          <!-- Lá solid (la1): cluster trái giữa + góc dưới phải, tone sage nhạt -->
+          <div class="couple-leaves couple-leaves-solid" aria-hidden="true">
+            <img src="images/la1.png" alt="" class="leaf-cluster leaf-cluster-1">
+            <img src="images/la1.png" alt="" class="leaf-cluster leaf-cluster-2">
+          </div>
+          <!-- Lá outline (la2): góc dưới trái + trên phải + cluster dưới ảnh cô dâu (bride hover trên) -->
+          <div class="couple-leaves couple-leaves-faint" aria-hidden="true">
+            <img src="images/la2.png" alt="" class="leaf-outline leaf-outline-1">
+            <img src="images/la2.png" alt="" class="leaf-outline leaf-outline-2">
+          </div>
+
+          <div class="couple-layout">
+            <div class="couple-block couple-groom">
+              <div class="couple-photo-wrap couple-photo-groom">
+                <img src="images/groom.jpg" alt="Chú rể Văn Toàn" class="couple-photo">
+              </div>
+              <div class="couple-info">
+                <p class="couple-role">CHÚ RỂ</p>
+                <h3 class="couple-name">Văn Toàn</h3>
+              </div>
+            </div>
+            <div class="couple-block couple-bride">
+              <div class="couple-photo-wrap couple-photo-bride">
+                <img src="images/bride.jpg" alt="Cô dâu Thanh Diệp" class="couple-photo">
+              </div>
+              <div class="couple-info">
+                <p class="couple-role">CÔ DÂU</p>
+                <h3 class="couple-name">Thanh Diệp</h3>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-album" class="section section-album">
+          <h2 class="section-title">Album Ảnh Cưới</h2>
+          <div class="album-grid">
+            <div class="album-item" data-src="images/album1.jpg"><img src="images/album1.jpg" alt="Album 1"></div>
+            <div class="album-item" data-src="images/album2.jpg"><img src="images/album2.jpg" alt="Album 2"></div>
+            <div class="album-item" data-src="images/album3.jpg"><img src="images/album3.jpg" alt="Album 3"></div>
+            <div class="album-item" data-src="images/album4.jpg"><img src="images/album4.jpg" alt="Album 4"></div>
+            <div class="album-item" data-src="images/album5.jpg"><img src="images/album5.jpg" alt="Album 5"></div>
+            <div class="album-item" data-src="images/album6.jpg"><img src="images/album6.jpg" alt="Album 6"></div>
+          </div>
+        </section>
+
+        <section id="section-location" class="section section-location">
+          <h2 class="section-title">BẢN ĐỒ</h2>
+          <p class="location-venue-title">Tiệc cưới sẽ tổ chức tại</p>
+          <img src="images/location.jpg" alt="Địa điểm tiệc cưới" class="location-photo">
+          <p class="location-address">Metropole Wedding Center, 216 Lý Chính Thắng, Phường 9, Quận 3, TP.HCM</p>
+          <div class="map-wrap">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.424758963363!2d106.70127631533434!3d10.776888992317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f467d2dc58b%3A0xa2726a9269972cf!2zVHLhuqduIMSQ4bqhaSBo4buNYyBD4bqnbiBUaMah!5e0!3m2!1svi!2s!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Bản đồ địa điểm"></iframe>
+          </div>
+        </section>
+
+        <section id="section-thanks" class="section section-thanks">
+          <h2 class="section-title">Lời cảm ơn</h2>
+          <p class="thanks-text">Sự hiện diện của quý khách là niềm vinh hạnh của gia đình chúng tôi!</p>
+          <p class="thanks-sign">Văn Toàn & Thanh Diệp</p>
+          <div class="qr-wrap">
+            <img src="images/qr-code.png" alt="QR Code" class="qr-image">
+            <p>Quét mã để gửi mừng cưới</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Đóng"><i class="fas fa-times"></i></button>
+    <img src="" alt="" id="lightboxImg">
+  </div>
+
+  <script>
+    (function() {
+      var wrapper = document.getElementById('invitationWrapper');
+      var cover = document.getElementById('invitationCover');
+      var flap = document.getElementById('envelopeFlap');
+      var seal = document.getElementById('envelopeSeal');
+      var openBtn = document.getElementById('openBtn');
+
+      function openInvitation() {
+        wrapper.classList.add('opened');
+        if (flap) flap.classList.add('opened');
+        if (seal) seal.classList.add('opened');
+        document.body.classList.add('invitation-opened');
+        document.getElementById('invitationInner').style.overflowY = 'auto';
+      }
+
+      openBtn.addEventListener('click', openInvitation);
+    })();
+
+    (function() {
+      var audio = document.getElementById('bgMusic');
+      var btn = document.getElementById('musicToggle');
+      var icon = btn.querySelector('i');
+      btn.addEventListener('click', function() {
+        if (audio.paused) {
+          audio.play().catch(function() {});
+          icon.classList.remove('fa-play');
+          icon.classList.add('fa-pause');
+        } else {
+          audio.pause();
+          icon.classList.remove('fa-pause');
+          icon.classList.add('fa-play');
+        }
+      });
+      audio.addEventListener('play', function() { icon.classList.remove('fa-play'); icon.classList.add('fa-pause'); });
+      audio.addEventListener('pause', function() { icon.classList.remove('fa-pause'); icon.classList.add('fa-play'); });
+    })();
+
+    (function() {
+      var canvas = document.getElementById('leafCanvas');
+      var ctx = canvas.getContext('2d');
+      var petals = [];
+      var petalCount = 18;
+      var petalImg = new Image();
+      petalImg.src = 'images/rose-petal.png';
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      function createPetal() {
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          scale: 0.08 + Math.random() * 0.12,
+          speedY: 0.4 + Math.random() * 1,
+          speedX: (Math.random() - 0.5) * 0.6,
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 1.5
+        };
+      }
+      function init() {
+        petals = [];
+        for (var i = 0; i < petalCount; i++) petals.push(createPetal());
+      }
+      function drawPetal(p) {
+        if (!petalImg.width) return;
+        var w = petalImg.width * p.scale;
+        var h = petalImg.height * p.scale;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation * Math.PI / 180);
+        ctx.drawImage(petalImg, -w / 2, -h / 2, w, h);
+        ctx.restore();
+      }
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = 0; i < petals.length; i++) {
+          var p = petals[i];
+          p.y += p.speedY;
+          p.x += p.speedX;
+          p.rotation += p.rotationSpeed;
+          if (p.y > canvas.height + 50) {
+            p.y = -30;
+            p.x = Math.random() * canvas.width;
+          }
+          if (p.x < -50) p.x = canvas.width + 50;
+          if (p.x > canvas.width + 50) p.x = -50;
+          drawPetal(p);
+        }
+        requestAnimationFrame(animate);
+      }
+      window.addEventListener('resize', resize);
+      resize();
+      petalImg.onload = function() {
+        init();
+        animate();
+      };
+      if (petalImg.complete && petalImg.naturalWidth) {
+        init();
+        animate();
+      }
+    })();
+
+    (function() {
+      var sections = document.querySelectorAll('.section');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+      }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+      sections.forEach(function(s) { observer.observe(s); });
+    })();
+
+    (function() {
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightboxImg');
+      var closeBtn = document.getElementById('lightboxClose');
+      document.querySelectorAll('.album-item').forEach(function(item) {
+        item.addEventListener('click', function() {
+          var src = this.getAttribute('data-src');
+          if (src) { lightboxImg.src = src; lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        });
+      });
+      function closeLightbox() { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+      closeBtn.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+    })();
+  </script>
+</body>
+</html>
