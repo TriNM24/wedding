@@ -256,20 +256,32 @@
       var icon = btn.querySelector('i');
       var hasTriedAutoplay = false;
 
-      // Set initial icon state
-      icon.classList.add('fa-play');
+      // Function to update icon based on muted and playing state
+      function updateIcon() {
+        // Remove all possible icons
+        icon.classList.remove('fa-music', 'fa-play', 'fa-pause', 'fa-volume-mute', 'fa-volume-xmark');
+
+        if (audio.paused) {
+          // If paused, show music note icon
+          icon.classList.add('fa-music');
+        } else {
+          // If playing, show mute/slash icon
+          icon.classList.add('fa-volume-xmark');
+        }
+      }
+
+      // Set initial icon state (muted)
+      updateIcon();
 
       // Function to start music
       function startMusic() {
         audio.muted = false; // Unmute the audio
         audio.play().then(function() {
-          icon.classList.remove('fa-play');
-          icon.classList.add('fa-pause');
+          updateIcon();
           console.log('Music playing successfully');
         }).catch(function(error) {
           console.log('Autoplay blocked or error:', error);
-          icon.classList.remove('fa-pause');
-          icon.classList.add('fa-play');
+          updateIcon();
         });
       }
 
@@ -301,26 +313,25 @@
           startMusic();
         } else {
           audio.pause();
-          icon.classList.remove('fa-pause');
-          icon.classList.add('fa-play');
+          updateIcon();
         }
       });
 
       // Update icon based on audio state
       audio.addEventListener('play', function() {
-        icon.classList.remove('fa-play');
-        icon.classList.add('fa-pause');
+        updateIcon();
       });
       audio.addEventListener('pause', function() {
-        icon.classList.remove('fa-pause');
-        icon.classList.add('fa-play');
+        updateIcon();
+      });
+      audio.addEventListener('volumechange', function() {
+        updateIcon();
       });
 
       // Handle audio errors
       audio.addEventListener('error', function(e) {
         console.error('Audio error:', e);
-        icon.classList.remove('fa-pause');
-        icon.classList.add('fa-play');
+        updateIcon();
       });
     })();
 
