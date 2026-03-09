@@ -171,7 +171,7 @@
           </div>
 
           <h2 class="invitation-main-title">TRÂN TRỌNG BÁO TIN</h2>
-          <p class="invitation-subtitle">LỄ THÀNH HÔN CỦA CON CHÚNG TÔI</p>
+          <p class="invitation-subtitle">LỄ THÀNH HÔN</p>
 
           <div class="invitation-couple-names">
             <p class="invitation-name invitation-name-groom">Lê Tiểu Thảo</p>
@@ -219,7 +219,7 @@
 
         <section id="section-thanks" class="section section-thanks">
           <h2 class="section-title">Lời cảm ơn</h2>
-          <p class="thanks-text">Sự hiện diện của quý khách là niềm vinh hạnh của gia đình chúng tôi!</p>
+          <p class="thanks-text">Sự hiện diện của <span id="guestName"></span> là niềm vinh hạnh của gia đình chúng tôi!</p>
           <p class="thanks-sign">Tiểu Thảo & Minh Trí</p>
         </section>
       </div>
@@ -423,6 +423,18 @@
         rootMargin: '0px 0px -80px 0px'
       });
       sections.forEach(function(s) { observer.observe(s); });
+    })();
+
+    // Read 'name' parameter from URL and display in thank you message
+    (function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var guestName = urlParams.get('name');
+      var guestNameSpan = document.getElementById('guestName');
+
+      if (guestName && guestNameSpan) {
+        // Add space before name
+        guestNameSpan.textContent = ' ' + guestName;
+      }
     })();
 
     (function() {
