@@ -67,7 +67,7 @@
               </div>
               <div class="card-date">9 tháng 5, 2026</div>
               <div class="card-phrase-wrap">
-                <p class="card-phrase">Thân Mời</p>
+                <p class="card-phrase">Thân Mời <span id="guestNameCard"></span></p>
               </div>
               <button type="button" id="openBtn" class="btn-open">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="btn-icon">
@@ -429,29 +429,40 @@
     (function() {
       var urlParams = new URLSearchParams(window.location.search);
       var guestName = urlParams.get('name');
-      var guestNameSpan = document.getElementById('guestName');
+      var guestNameCard = document.getElementById('guestNameCard');
+      var guestNameThanks = document.getElementById('guestName');
       var titleWithGuest = document.getElementById('titleWithGuest');
 
-      if (guestName && guestNameSpan && titleWithGuest) {
-        // Add guest name
-        guestNameSpan.textContent = guestName;
-
-        // Determine title based on guest name
-        var nameLower = guestName.toLowerCase();
-        var title = 'tụi tui'; // default
-
-        if (nameLower.includes('anh') || nameLower.includes('chị')) {
-          title = 'tụi em';
-        } else if (nameLower.includes('em')) {
-          title = 'anh chị';
-        } else {
-          title = 'tụi tui';
+      if (guestName) {
+        // Add guest name to card
+        if (guestNameCard) {
+          guestNameCard.textContent = guestName;
         }
 
-        titleWithGuest.textContent = title;
-      } else if (!guestName) {
+        // Add guest name to thanks section
+        if (guestNameThanks) {
+          guestNameThanks.textContent = guestName;
+        }
+
+        // Determine title based on guest name
+        if (titleWithGuest) {
+          var nameLower = guestName.toLowerCase();
+          var title = 'tụi tui'; // default
+
+          if (nameLower.includes('anh') || nameLower.includes('chị')) {
+            title = 'tụi em';
+          } else if (nameLower.includes('em')) {
+            title = 'anh chị';
+          } else {
+            title = 'tụi tui';
+          }
+
+          titleWithGuest.textContent = title;
+        }
+      } else {
         // No name provided, use default text
-        if (guestNameSpan) guestNameSpan.textContent = 'bạn';
+        if (guestNameCard) guestNameCard.textContent = '';
+        if (guestNameThanks) guestNameThanks.textContent = 'bạn';
         if (titleWithGuest) titleWithGuest.textContent = 'chúng tôi';
       }
     })();

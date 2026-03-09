@@ -513,6 +513,7 @@ body.invitation-opened {
 
 /* Staggered animations for child elements */
 .section-couple .couple-story-title,
+.section-couple .couple-block,
 .section-album .section-title,
 .section-album .album-item,
 .section-invitation .invitation-parents,
@@ -521,15 +522,6 @@ body.invitation-opened {
 .section-invitation .invitation-ceremony,
 .section-invitation .invitation-reception,
 .section-invitation .invitation-venue {
-  opacity: 0;
-  transform: translateY(30px);
-  transition:
-    opacity 0.7s ease-out,
-    transform 0.7s ease-out;
-}
-
-/* Couple blocks - only animate when parent is visible */
-.section-couple.visible .couple-block {
   opacity: 0;
   transform: translateY(30px);
   transition:
