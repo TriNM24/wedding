@@ -858,7 +858,7 @@ body.invitation-opened {
 
 /* ========== Section Couple – THE STORY of LOVE (đúng ảnh mẫu) ========== */
 .section-couple {
-  background: #f8f6f3; /* pale cream / off-white */
+  /*background: #f8f6f3;*/
   position: relative;
   margin-left: -1.25rem;
   margin-right: -1.25rem;
