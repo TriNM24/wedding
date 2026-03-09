@@ -678,8 +678,6 @@ body.invitation-opened {
 .section-invitation {
   position: relative;
   background: #1a3620;
-  margin-left: -1.25rem;
-  margin-right: -1.25rem;
   padding: 2.5rem 1.25rem 3rem;
   color: rgba(255, 255, 255, 0.95);
   overflow: hidden;
@@ -688,8 +686,6 @@ body.invitation-opened {
 
 @media (min-width: 600px) {
   .section-invitation {
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
     padding: 3rem 2rem 4rem;
   }
 }
