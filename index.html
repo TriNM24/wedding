@@ -238,6 +238,7 @@
       var flap = document.getElementById('envelopeFlap');
       var seal = document.getElementById('envelopeSeal');
       var openBtn = document.getElementById('openBtn');
+      var audio = document.getElementById('bgMusic');
 
       function openInvitation() {
         wrapper.classList.add('opened');
@@ -245,6 +246,14 @@
         if (seal) seal.classList.add('opened');
         document.body.classList.add('invitation-opened');
         document.getElementById('invitationInner').style.overflowY = 'auto';
+
+        // Start playing music when invitation is opened
+        if (audio) {
+          audio.muted = false;
+          audio.play().catch(function(error) {
+            console.log('Music autoplay blocked:', error);
+          });
+        }
       }
 
       openBtn.addEventListener('click', openInvitation);
