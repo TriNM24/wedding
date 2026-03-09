@@ -228,6 +228,8 @@
 
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh">
     <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Đóng"><i class="fas fa-times"></i></button>
+    <button type="button" class="lightbox-arrow lightbox-arrow-left" id="lightboxPrev" aria-label="Ảnh trước"><i class="fas fa-chevron-left"></i></button>
+    <button type="button" class="lightbox-arrow lightbox-arrow-right" id="lightboxNext" aria-label="Ảnh tiếp theo"><i class="fas fa-chevron-right"></i></button>
     <img src="" alt="" id="lightboxImg">
   </div>
 
@@ -471,16 +473,113 @@
       var lightbox = document.getElementById('lightbox');
       var lightboxImg = document.getElementById('lightboxImg');
       var closeBtn = document.getElementById('lightboxClose');
-      document.querySelectorAll('.album-item').forEach(function(item) {
+      var prevBtn = document.getElementById('lightboxPrev');
+      var nextBtn = document.getElementById('lightboxNext');
+      var albumItems = document.querySelectorAll('.album-item');
+      var currentIndex = 0;
+
+      // Touch handling for swipe
+      var touchStartX = 0;
+      var touchEndX = 0;
+
+      function showImage(index) {
+        if (index >= 0 && index < albumItems.length) {
+          currentIndex = index;
+          var src = albumItems[currentIndex].getAttribute('data-src');
+          if (src) {
+            lightboxImg.src = src;
+          }
+        }
+      }
+
+      function openLightbox(index) {
+        currentIndex = index;
+        showImage(currentIndex);
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function showPrevious() {
+        var newIndex = currentIndex - 1;
+        if (newIndex < 0) {
+          newIndex = albumItems.length - 1; // Loop to last image
+        }
+        showImage(newIndex);
+      }
+
+      function showNext() {
+        var newIndex = currentIndex + 1;
+        if (newIndex >= albumItems.length) {
+          newIndex = 0; // Loop to first image
+        }
+        showImage(newIndex);
+      }
+
+      // Click handlers
+      albumItems.forEach(function(item, index) {
         item.addEventListener('click', function() {
-          var src = this.getAttribute('data-src');
-          if (src) { lightboxImg.src = src; lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; }
+          openLightbox(index);
         });
       });
-      function closeLightbox() { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+
       closeBtn.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
-      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        showPrevious();
+      });
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        showNext();
+      });
+
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        if (!lightbox.classList.contains('active')) return;
+
+        if (e.key === 'Escape') {
+          closeLightbox();
+        } else if (e.key === 'ArrowLeft') {
+          showPrevious();
+        } else if (e.key === 'ArrowRight') {
+          showNext();
+        }
+      });
+
+      // Touch/swipe handling
+      lightbox.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, false);
+
+      lightbox.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, false);
+
+      function handleSwipe() {
+        var swipeThreshold = 50; // Minimum distance for swipe
+        var diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            // Swiped left, show next
+            showNext();
+          } else {
+            // Swiped right, show previous
+            showPrevious();
+          }
+        }
+      }
     })();
   </script>
 </body>
