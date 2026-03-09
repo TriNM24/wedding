@@ -219,7 +219,7 @@
 
         <section id="section-thanks" class="section section-thanks">
           <h2 class="section-title">Lời cảm ơn</h2>
-          <p class="thanks-text">Sự hiện diện của <span id="guestName"></span> là niềm vinh hạnh của gia đình chúng tôi!</p>
+          <p class="thanks-text">Sự hiện diện của <span id="guestName"></span> là niềm vinh hạnh của gia đình <span id="titleWithGuest"></span>!</p>
           <p class="thanks-sign">Tiểu Thảo & Minh Trí</p>
         </section>
       </div>
@@ -430,10 +430,29 @@
       var urlParams = new URLSearchParams(window.location.search);
       var guestName = urlParams.get('name');
       var guestNameSpan = document.getElementById('guestName');
+      var titleWithGuest = document.getElementById('titleWithGuest');
 
-      if (guestName && guestNameSpan) {
-        // Add space before name
-        guestNameSpan.textContent = ' ' + guestName;
+      if (guestName && guestNameSpan && titleWithGuest) {
+        // Add guest name
+        guestNameSpan.textContent = guestName;
+
+        // Determine title based on guest name
+        var nameLower = guestName.toLowerCase();
+        var title = 'tụi tui'; // default
+
+        if (nameLower.includes('anh') || nameLower.includes('chị')) {
+          title = 'tụi em';
+        } else if (nameLower.includes('em')) {
+          title = 'anh chị';
+        } else {
+          title = 'tụi tui';
+        }
+
+        titleWithGuest.textContent = title;
+      } else if (!guestName) {
+        // No name provided, use default text
+        if (guestNameSpan) guestNameSpan.textContent = 'bạn';
+        if (titleWithGuest) titleWithGuest.textContent = 'chúng tôi';
       }
     })();
 
