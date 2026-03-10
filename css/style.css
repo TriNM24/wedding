@@ -24,6 +24,27 @@
   padding: 0;
 }
 
+/* Remove focus outline and tap highlight for all buttons and interactive elements */
+button,
+input,
+a,
+select,
+textarea {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+button:focus,
+button:active,
+input:focus,
+input:active,
+a:focus,
+a:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 html {
   font-size: 16px;
   scroll-behavior: smooth;
@@ -125,6 +146,16 @@ body.invitation-opened {
   transition:
     transform 0.2s,
     box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(var(--green-rgb), 0.2);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.music-toggle:focus,
+.music-toggle:active {
+  outline: none !important;
   box-shadow: 0 2px 12px rgba(var(--green-rgb), 0.2);
 }
 
@@ -368,6 +399,16 @@ body.invitation-opened {
     transform 0.2s,
     box-shadow 0.2s;
   overflow: hidden;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.btn-open:focus,
+.btn-open:active {
+  outline: none !important;
+  box-shadow: 0 4px 14px rgba(78, 100, 57, 0.35);
 }
 
 .btn-open:hover {
@@ -1464,6 +1505,15 @@ body.invitation-opened {
   transition:
     transform 0.3s,
     box-shadow 0.3s;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.album-item:focus,
+.album-item:active {
+  outline: none !important;
 }
 
 .album-item:hover {
@@ -1520,6 +1570,16 @@ body.invitation-opened {
   font-size: 1.25rem;
   transition: background 0.2s;
   z-index: 1001;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.lightbox-close:focus,
+.lightbox-close:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .lightbox-close:hover {
@@ -1543,6 +1603,16 @@ body.invitation-opened {
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+.lightbox-arrow:focus,
+.lightbox-arrow:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .lightbox-arrow:hover {
