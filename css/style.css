@@ -559,7 +559,7 @@ body.invitation-opened {
 /* ========== Section: Timeline ========== */
 .section-timeline {
   background: transparent;
-  padding: 1rem 0 3rem;
+  padding: 1rem 0 0rem;
   position: relative;
   overflow: hidden;
   border-radius: 10px;
@@ -726,6 +726,7 @@ body.invitation-opened {
 }
 
 .section-album {
+  margin-top: -1rem;
   transform: translateX(-30px);
   transition:
     opacity 0.9s ease-out 0.1s,
