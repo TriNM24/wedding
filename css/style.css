@@ -606,6 +606,8 @@ body.invitation-opened {
   flex-shrink: 0;
   width: 180px;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 .timeline-time {
@@ -639,17 +641,28 @@ body.invitation-opened {
   transition: all 0.3s ease;
   position: relative;
   z-index: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .timeline-image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(var(--green-rgb), 0.3);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(var(--green-rgb), 0.4);
+  border-color: var(--green-main);
 }
 
 .timeline-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  pointer-events: none;
 }
 
 .timeline-label {

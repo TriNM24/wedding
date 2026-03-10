@@ -610,7 +610,31 @@
       var closeBtn = document.getElementById('lightboxClose');
       var prevBtn = document.getElementById('lightboxPrev');
       var nextBtn = document.getElementById('lightboxNext');
+
+      // Collect both album items and timeline images
       var albumItems = document.querySelectorAll('.album-item');
+      var timelineImages = document.querySelectorAll('.timeline-image');
+      var allClickableImages = [];
+
+      // Add album items
+      albumItems.forEach(function(item) {
+        allClickableImages.push({
+          element: item,
+          src: item.getAttribute('data-src')
+        });
+      });
+
+      // Add timeline images
+      timelineImages.forEach(function(item) {
+        var img = item.querySelector('img');
+        if (img) {
+          allClickableImages.push({
+            element: item,
+            src: img.getAttribute('src')
+          });
+        }
+      });
+
       var currentIndex = 0;
       var isAnimating = false;
 
@@ -619,7 +643,7 @@
       var touchEndX = 0;
 
       function showImage(index, direction) {
-        if (index >= 0 && index < albumItems.length && !isAnimating) {
+        if (index >= 0 && index < allClickableImages.length && !isAnimating) {
           isAnimating = true;
 
           // Remove any existing animation classes
@@ -635,7 +659,7 @@
           // Wait for slide-out animation to complete
           setTimeout(function() {
             currentIndex = index;
-            var src = albumItems[currentIndex].getAttribute('data-src');
+            var src = allClickableImages[currentIndex].src;
             if (src) {
               lightboxImg.src = src;
             }
@@ -657,7 +681,7 @@
         } else if (!direction) {
           // No animation for initial load
           currentIndex = index;
-          var src = albumItems[currentIndex].getAttribute('data-src');
+          var src = allClickableImages[currentIndex].src;
           if (src) {
             lightboxImg.src = src;
           }
@@ -683,7 +707,7 @@
         if (isAnimating) return;
         var newIndex = currentIndex - 1;
         if (newIndex < 0) {
-          newIndex = albumItems.length - 1; // Loop to last image
+          newIndex = allClickableImages.length - 1; // Loop to last image
         }
         showImage(newIndex, 'prev');
       }
@@ -691,17 +715,19 @@
       function showNext() {
         if (isAnimating) return;
         var newIndex = currentIndex + 1;
-        if (newIndex >= albumItems.length) {
+        if (newIndex >= allClickableImages.length) {
           newIndex = 0; // Loop to first image
         }
         showImage(newIndex, 'next');
       }
 
-      // Click handlers
-      albumItems.forEach(function(item, index) {
-        item.addEventListener('click', function() {
+      // Click handlers for all images (album + timeline)
+      allClickableImages.forEach(function(item, index) {
+        item.element.addEventListener('click', function() {
           openLightbox(index);
         });
+        // Add pointer cursor for timeline images
+        item.element.style.cursor = 'pointer';
       });
 
       closeBtn.addEventListener('click', closeLightbox);
