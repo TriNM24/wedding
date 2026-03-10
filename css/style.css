@@ -1537,6 +1537,11 @@ body.invitation-opened {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   user-select: none;
+  position: relative;
+}
+
+.album-item.hidden {
+  display: none;
 }
 
 .album-item:focus,
@@ -1554,6 +1559,28 @@ body.invitation-opened {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.album-more-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+.album-more-icon {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .lightbox {

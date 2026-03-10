@@ -138,12 +138,18 @@
 
         <section id="section-album" class="section section-album">
           <h2 class="section-title">Album Ảnh Cưới</h2>
-          <div class="album-grid">
+          <div class="album-grid" id="albumGrid">
             <div class="album-item" data-src="images/album1.jpg"><img src="images/album1.jpg" alt="Album 1"></div>
             <div class="album-item" data-src="images/album2.jpg"><img src="images/album2.jpg" alt="Album 2"></div>
             <div class="album-item" data-src="images/album3.jpg"><img src="images/album3.jpg" alt="Album 3"></div>
             <div class="album-item" data-src="images/album4.jpg"><img src="images/album4.jpg" alt="Album 4"></div>
             <div class="album-item" data-src="images/album5.jpg"><img src="images/album5.jpg" alt="Album 5"></div>
+            <div class="album-item" data-src="images/album6.jpg"><img src="images/album6.jpg" alt="Album 6"></div>
+            <div class="album-item" data-src="images/album6.jpg"><img src="images/album6.jpg" alt="Album 6"></div>
+            <div class="album-item" data-src="images/album6.jpg"><img src="images/album6.jpg" alt="Album 6"></div>
+            <div class="album-item" data-src="images/album6.jpg"><img src="images/album6.jpg" alt="Album 6"></div>
+            <div class="album-item" data-src="images/album6.jpg"><img src="images/album6.jpg" alt="Album 6"></div>
+            <div class="album-item" data-src="images/album6.jpg"><img src="images/album6.jpg" alt="Album 6"></div>
             <div class="album-item" data-src="images/album6.jpg"><img src="images/album6.jpg" alt="Album 6"></div>
           </div>
         </section>
@@ -466,6 +472,33 @@
         if (guestNameCard) guestNameCard.textContent = '';
         if (guestNameThanks) guestNameThanks.textContent = 'bạn';
         if (titleWithGuest) titleWithGuest.textContent = 'chúng tôi';
+      }
+    })();
+
+    // Album display limit: Show only 6 images, add ++ overlay if more exist
+    (function() {
+      var albumGrid = document.getElementById('albumGrid');
+      if (!albumGrid) return;
+
+      var albumItems = albumGrid.querySelectorAll('.album-item');
+      var maxVisible = 6;
+
+      if (albumItems.length > maxVisible) {
+        // Hide items after the 6th one
+        for (var i = maxVisible; i < albumItems.length; i++) {
+          albumItems[i].classList.add('hidden');
+        }
+
+        // Add icon overlay to the 6th item
+        var sixthItem = albumItems[maxVisible - 1];
+        var overlay = document.createElement('div');
+        overlay.className = 'album-more-overlay';
+        var icon = document.createElement('img');
+        icon.src = 'images/ic_more.png';
+        icon.alt = 'More images';
+        icon.className = 'album-more-icon';
+        overlay.appendChild(icon);
+        sixthItem.appendChild(overlay);
       }
     })();
 
