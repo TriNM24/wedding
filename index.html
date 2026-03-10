@@ -449,7 +449,11 @@
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
+            // Add visible class when entering viewport
             entry.target.classList.add('visible');
+          } else {
+            // Remove visible class when leaving viewport to allow re-animation
+            entry.target.classList.remove('visible');
           }
         });
       }, {
