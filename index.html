@@ -477,13 +477,50 @@
       var nextBtn = document.getElementById('lightboxNext');
       var albumItems = document.querySelectorAll('.album-item');
       var currentIndex = 0;
+      var isAnimating = false;
 
       // Touch handling for swipe
       var touchStartX = 0;
       var touchEndX = 0;
 
-      function showImage(index) {
-        if (index >= 0 && index < albumItems.length) {
+      function showImage(index, direction) {
+        if (index >= 0 && index < albumItems.length && !isAnimating) {
+          isAnimating = true;
+
+          // Remove any existing animation classes
+          lightboxImg.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
+
+          // Add slide-out animation based on direction
+          if (direction === 'next') {
+            lightboxImg.classList.add('slide-out-left');
+          } else if (direction === 'prev') {
+            lightboxImg.classList.add('slide-out-right');
+          }
+
+          // Wait for slide-out animation to complete
+          setTimeout(function() {
+            currentIndex = index;
+            var src = albumItems[currentIndex].getAttribute('data-src');
+            if (src) {
+              lightboxImg.src = src;
+            }
+
+            // Remove slide-out and add slide-in animation
+            lightboxImg.classList.remove('slide-out-left', 'slide-out-right');
+            if (direction === 'next') {
+              lightboxImg.classList.add('slide-in-right');
+            } else if (direction === 'prev') {
+              lightboxImg.classList.add('slide-in-left');
+            }
+
+            // Remove animation class after animation completes
+            setTimeout(function() {
+              lightboxImg.classList.remove('slide-in-left', 'slide-in-right');
+              isAnimating = false;
+            }, 300);
+          }, direction ? 300 : 0);
+        } else if (!direction) {
+          // No animation for initial load
           currentIndex = index;
           var src = albumItems[currentIndex].getAttribute('data-src');
           if (src) {
@@ -502,22 +539,27 @@
       function closeLightbox() {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
+        // Reset animation classes
+        lightboxImg.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
+        isAnimating = false;
       }
 
       function showPrevious() {
+        if (isAnimating) return;
         var newIndex = currentIndex - 1;
         if (newIndex < 0) {
           newIndex = albumItems.length - 1; // Loop to last image
         }
-        showImage(newIndex);
+        showImage(newIndex, 'prev');
       }
 
       function showNext() {
+        if (isAnimating) return;
         var newIndex = currentIndex + 1;
         if (newIndex >= albumItems.length) {
           newIndex = 0; // Loop to first image
         }
-        showImage(newIndex);
+        showImage(newIndex, 'next');
       }
 
       // Click handlers
