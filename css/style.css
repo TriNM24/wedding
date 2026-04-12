@@ -570,6 +570,66 @@ body.invitation-opened {
     transform 0.9s ease-out;
 }
 
+.timeline-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  position: relative;
+}
+
+.timeline-scroll-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--green-main);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(var(--green-rgb), 0.3);
+  z-index: 10;
+}
+
+.timeline-scroll-btn:hover {
+  background: var(--green-dark);
+  box-shadow: 0 4px 12px rgba(var(--green-rgb), 0.5);
+  transform: scale(1.1);
+}
+
+.timeline-scroll-btn:active {
+  transform: scale(0.95);
+}
+
+.timeline-scroll-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: white;
+}
+
+/* Show buttons on desktop */
+@media (min-width: 768px) {
+  .timeline-scroll-btn {
+    display: flex;
+  }
+
+  .timeline-scroll-btn-left {
+    position: absolute;
+    left: 0;
+  }
+
+  .timeline-scroll-btn-right {
+    position: absolute;
+    right: 0;
+  }
+}
+
 .section-timeline.visible {
   opacity: 1;
   transform: translateY(0);
@@ -583,6 +643,8 @@ body.invitation-opened {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   padding: 2rem 1rem;
+  flex: 1;
+  position: relative;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

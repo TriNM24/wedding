@@ -159,8 +159,15 @@
         <section id="section-timeline" class="section section-timeline">
           <h2 class="section-title">Chặng Đường Yêu</h2>
 
-          <div class="timeline-scroll-container">
-            <div class="timeline-track">
+          <div class="timeline-container">
+            <button class="timeline-scroll-btn timeline-scroll-btn-left" id="scrollLeftBtn" aria-label="Cuộn trái">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+
+            <div class="timeline-scroll-container">
+              <div class="timeline-track">
               <div class="timeline-item">
                 <div class="timeline-time">30/07/2022</div>
                 <div class="timeline-connector"></div>
@@ -225,6 +232,13 @@
                 <div class="timeline-label">Ngày cưới</div>
               </div>
             </div>
+          </div>
+
+            <button class="timeline-scroll-btn timeline-scroll-btn-right" id="scrollRightBtn" aria-label="Cuộn phải">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
           </div>
         </section>
 
@@ -783,6 +797,48 @@
           }
         }
       }
+    })();
+
+    // Timeline scroll buttons functionality
+    (function() {
+      var scrollContainer = document.querySelector('.timeline-scroll-container');
+      var scrollLeftBtn = document.getElementById('scrollLeftBtn');
+      var scrollRightBtn = document.getElementById('scrollRightBtn');
+
+      if (!scrollContainer || !scrollLeftBtn || !scrollRightBtn) return;
+
+      var scrollAmount = 300; // pixels to scroll on each click
+
+      scrollLeftBtn.addEventListener('click', function() {
+        scrollContainer.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+
+      scrollRightBtn.addEventListener('click', function() {
+        scrollContainer.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+
+      // Update button visibility based on scroll position
+      function updateButtonVisibility() {
+        var isAtStart = scrollContainer.scrollLeft <= 0;
+        var isAtEnd = scrollContainer.scrollLeft >= (scrollContainer.scrollWidth - scrollContainer.clientWidth - 10);
+
+        scrollLeftBtn.style.opacity = isAtStart ? '0.5' : '1';
+        scrollLeftBtn.style.pointerEvents = isAtStart ? 'none' : 'auto';
+        scrollRightBtn.style.opacity = isAtEnd ? '0.5' : '1';
+        scrollRightBtn.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+      }
+
+      scrollContainer.addEventListener('scroll', updateButtonVisibility);
+      window.addEventListener('resize', updateButtonVisibility);
+
+      // Initial check
+      setTimeout(updateButtonVisibility, 500);
     })();
   </script>
 </body>
