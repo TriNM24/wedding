@@ -30,6 +30,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Pattaya&family=Great+Vibes&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Prevent zoom on lightbox */
+    #lightbox img {
+      touch-action: pan-x pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      pointer-events: auto;
+    }
+    #lightbox {
+      touch-action: pan-x pan-y;
+    }
+  </style>
   <script>
     // Suppress Grammarly unload policy violation
     (function() {
@@ -753,6 +767,31 @@
         });
         // Add pointer cursor for timeline images
         item.element.style.cursor = 'pointer';
+      });
+
+      // Prevent zoom on lightbox image
+      lightboxImg.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      lightboxImg.addEventListener('touchmove', function(e) {
+        if (e.touches.length > 1) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      lightboxImg.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+      });
+
+      lightboxImg.addEventListener('gesturechange', function(e) {
+        e.preventDefault();
+      });
+
+      lightboxImg.addEventListener('gestureend', function(e) {
+        e.preventDefault();
       });
 
       closeBtn.addEventListener('click', closeLightbox);
